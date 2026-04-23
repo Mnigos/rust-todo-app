@@ -1,0 +1,3 @@
+base_color = "stone"
+color_theme = "lime"
+base_path_components = "src/components"

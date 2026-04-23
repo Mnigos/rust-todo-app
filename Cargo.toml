@@ -1,0 +1,13 @@
+[package]
+name = "rust-todo-app"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+icons = { version = "0.18.2", features = ["leptos"] }
+leptos = { version = "0.8.19", features = ["csr"] }
+leptos_ui = "0.3.22"
+tw_merge = { version = "0.1.21", features = ["variant"] }
+
+[package.metadata.leptos]
+tailwind-input-file = "src/tailwind.css"
