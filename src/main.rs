@@ -1,3 +1,4 @@
+mod components;
 use leptos::prelude::*;
 
 fn main() {
