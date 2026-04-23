@@ -8,8 +8,11 @@ icons = { version = "0.18.2", features = ["leptos"] }
 leptos = { version = "0.8.19", features = ["csr"] }
 leptos_router = "0.8.13"
 leptos_ui = "0.3.22"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0.149"
 strum = "0.28.0"
 tw_merge = { version = "0.1.21", features = ["variant"] }
+web-sys = { version = "0.3.95", features = ["Window", "Storage"] }
 
 [package.metadata.leptos]
 tailwind-input-file = "src/tailwind.css"

@@ -1338,8 +1338,11 @@ dependencies = [
  "leptos",
  "leptos_router",
  "leptos_ui",
+ "serde",
+ "serde_json",
  "strum",
  "tw_merge",
+ "web-sys",
 ]
 
 [[package]]
