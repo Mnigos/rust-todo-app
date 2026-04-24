@@ -1,9 +1,9 @@
-use leptos::prelude::*;
-use crate::components::ui::input::Input;
 use crate::components::ui::button::Button;
+use crate::components::ui::input::Input;
+use leptos::prelude::*;
 
 #[component]
-pub fn AddTask(on_add: Callback<String>) -> impl IntoView {
+pub fn AddTask(#[prop(into)] on_add: Callback<String>) -> impl IntoView {
     let task_name = RwSignal::new(String::new());
 
     let add_current_task = move || {
