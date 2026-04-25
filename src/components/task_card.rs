@@ -7,7 +7,7 @@ pub fn TaskCard(
     #[prop(into)] on_complete: Callback<u64>,
 ) -> impl IntoView {
     view! {
-      <div class="py-2 px-3 bg-muted/20 rounded-lg flex justify-between items-center">
+      <div class="flex justify-between items-center py-2 px-3 rounded-lg bg-muted/20">
         <p>{task.name}</p>
 
         <Checkbox checked={task.is_completed} on_checked_change=move |checked| {

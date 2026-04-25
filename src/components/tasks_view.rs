@@ -61,7 +61,7 @@ pub fn TasksView() -> impl IntoView {
     };
 
     view! {
-      <section class="w-full max-w-96 flex flex-col gap-6">
+      <section class="flex flex-col gap-6 w-full max-w-96">
         <AddTask on_add />
 
         <div class="flex flex-col gap-1">
