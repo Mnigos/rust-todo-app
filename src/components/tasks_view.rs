@@ -1,12 +1,9 @@
-use crate::components::add_task::AddTask;
-use leptos::prelude::*;
-use serde::{Deserialize, Serialize};
+use crate::{
+    components::{add_task::AddTask, task_card::TaskCard},
+    models::Task,
+};
 
-#[derive(Clone, Serialize, Deserialize)]
-struct Task {
-    name: String,
-    is_completed: bool,
-}
+use leptos::prelude::*;
 
 fn load_tasks() -> Vec<Task> {
     let Some(storage) = window().local_storage().ok().flatten() else {
@@ -48,25 +45,30 @@ pub fn TasksView() -> impl IntoView {
     let on_add = move |name: String| {
         tasks.update(|tasks| {
             tasks.push(Task {
+                id: u64::try_from(tasks.len()).expect("Failed to parse tasks len") + 1,
                 name,
                 is_completed: false,
             })
         })
     };
 
+    let on_complete = move |task_id: u64| {
+        tasks.update(|tasks| {
+            if let Some(task) = tasks.iter_mut().find(|task| task.id == task_id) {
+                task.is_completed = true;
+            }
+        });
+    };
+
     view! {
       <section class="w-full max-w-96 flex flex-col gap-6">
         <AddTask on_add />
 
-        <div>
+        <div class="flex flex-col gap-1">
           {move || {
               tasks.get().into_iter().map(|task|
                   view! {
-                    <div class="py-2 px-3 bg-muted/20 rounded-lg">
-                      <p>{task.name}</p>
-
-                      <p>{if task.is_completed { "Completed" } else { "" }}</p>
-                    </div>
+                    <TaskCard task on_complete />
                   }
               ).collect_view()
           }}

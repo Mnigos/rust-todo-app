@@ -1,5 +1,4 @@
-use crate::components::ui::button::Button;
-use crate::components::ui::input::Input;
+use crate::components::ui::{button::Button, input::Input};
 use leptos::prelude::*;
 
 #[component]
