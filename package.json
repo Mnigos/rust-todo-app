@@ -5,8 +5,9 @@
 	"scripts": {
 		"build": "npm run tw:build && trunk build",
 		"check": "cargo check",
-		"dev": "concurrently -k -n tailwind,trunk \"npm:tw:watch\" \"trunk serve\"",
-		"serve": "trunk serve",
+		"dev": "concurrently -k -n tailwind,trunk,server \"npm:tw:watch\" \"trunk serve --port 3000\" \"cargo run --bin server\"",
+		"dev:server": "cargo run --bin server",
+		"serve": "trunk serve --port 3000",
 		"tw:build": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css --minify",
 		"tw:watch": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css --watch",
 		"prepare": "husky"
