@@ -3,13 +3,11 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "npm run tw:build && cargo leptos build --release",
+		"build": "cargo leptos build --release",
 		"check": "cargo check --features ssr --bin rust-todo-app && cargo check --features hydrate --lib",
 		"dev": "cargo leptos watch",
 		"dev:server": "cargo leptos watch",
 		"serve": "cargo leptos watch",
-		"tw:build": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css --minify",
-		"tw:watch": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css --watch",
 		"prepare": "husky"
 	},
 	"dependencies": {
