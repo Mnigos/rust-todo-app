@@ -17,7 +17,7 @@ pub fn AddTask(#[prop(into)] on_add: Callback<String>) -> impl IntoView {
     };
 
     view! {
-      <form class="flex gap-4 justify-between items-end w-full" on:submit= move|ev| {
+      <form class="flex gap-4 justify-between items-end w-full" on:submit=move |ev| {
           ev.prevent_default();
           add_current_task();
       }>

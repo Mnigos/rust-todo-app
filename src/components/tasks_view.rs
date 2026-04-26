@@ -2,9 +2,9 @@ use crate::{
     components::{add_task::AddTask, task_card::TaskCard},
     models::Task,
 };
-
 use leptos::prelude::*;
 
+#[cfg(feature = "hydrate")]
 fn load_tasks() -> Vec<Task> {
     let Some(storage) = window().local_storage().ok().flatten() else {
         return Vec::<Task>::new();
@@ -18,6 +18,12 @@ fn load_tasks() -> Vec<Task> {
     }
 }
 
+#[cfg(not(feature = "hydrate"))]
+fn load_tasks() -> Vec<Task> {
+    vec![]
+}
+
+#[cfg(feature = "hydrate")]
 fn save_tasks(tasks: &[Task]) {
     let Some(storage) = window().local_storage().ok().flatten() else {
         return;
@@ -31,6 +37,9 @@ fn save_tasks(tasks: &[Task]) {
         leptos::logging::error!("failed to save tasks: {:?}", err);
     }
 }
+
+#[cfg(not(feature = "hydrate"))]
+fn save_tasks(_tasks: &[Task]) {}
 
 #[component]
 pub fn TasksView() -> impl IntoView {
