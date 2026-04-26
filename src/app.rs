@@ -1,7 +1,5 @@
 use crate::components::tasks_view::TasksView;
 use leptos::prelude::*;
-#[cfg(feature = "ssr")]
-use leptos_meta::MetaTags;
 use leptos_meta::{Stylesheet, Title, provide_meta_context};
 use leptos_router::{
     StaticSegment,
@@ -10,6 +8,8 @@ use leptos_router::{
 
 #[cfg(feature = "ssr")]
 pub fn shell(options: LeptosOptions) -> impl IntoView {
+    use leptos_meta::MetaTags;
+
     view! {
       <!DOCTYPE html>
       <html>
