@@ -1,7 +1,8 @@
 use super::task_id::TaskId;
 use super::task_title::{TaskTitle, TaskTitleError};
+use serde::{Deserialize, Serialize};
 
-#[derive(Clone)]
+#[derive(Clone, Serialize, Deserialize)]
 pub struct Task {
     id: TaskId,
     title: TaskTitle,
