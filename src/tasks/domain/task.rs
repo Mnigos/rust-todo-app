@@ -1,5 +1,5 @@
 use super::task_id::TaskId;
-use super::task_title::{TaskTitle, TaskTitleError};
+use super::task_title::TaskTitle;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -10,12 +10,12 @@ pub struct Task {
 }
 
 impl Task {
-    pub fn new(id: TaskId, title: String) -> Result<Self, TaskTitleError> {
-        Ok(Self {
+    pub fn new(id: TaskId, title: TaskTitle) -> Self {
+        Self {
             id,
-            title: TaskTitle::new(title)?,
+            title,
             is_completed: false,
-        })
+        }
     }
 
     pub fn id(&self) -> &TaskId {
