@@ -1,4 +1,4 @@
-use crate::tasks::domain::task::Task;
+use crate::tasks::domain::Task;
 use std::{fs, io, path::PathBuf};
 
 pub struct TaskRepository {
