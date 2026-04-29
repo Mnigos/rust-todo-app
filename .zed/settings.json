@@ -24,6 +24,9 @@
           "buildScripts": {
             "enable": true
           }
+        },
+        "diagnostics": {
+          "disabled": ["unlinked-file"]
         }
       }
     }

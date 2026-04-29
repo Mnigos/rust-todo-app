@@ -27,3 +27,7 @@ Prefer teaching the user how Leptos works instead of hiding things behind abstra
 Prefer explaining signals, reactive updates, component boundaries, async data flow, and server/client responsibilities clearly.
 If discussing future Axum or database work, keep the explanation incremental and grounded in the current codebase state.
 Do not edit generated output in `dist/` unless the user explicitly asks about build artifacts.
+
+Editor setup:
+
+This project uses Zed, not VS Code. Prefer project-local Zed configuration in `.zed/settings.json` for editor, LSP, formatting, and rust-analyzer settings.
