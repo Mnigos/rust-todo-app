@@ -3,17 +3,17 @@ use leptos::prelude::*;
 
 #[component]
 pub fn AddTask(#[prop(into)] on_add: Callback<String>) -> impl IntoView {
-    let task_name = RwSignal::new(String::new());
+    let task_title = RwSignal::new(String::new());
 
     let add_current_task = move || {
-        let name = task_name.get();
+        let title = task_title.get();
 
-        if name.trim().is_empty() {
+        if title.trim().is_empty() {
             return;
         }
 
-        on_add.run(name);
-        task_name.set(String::new());
+        on_add.run(title);
+        task_title.set(String::new());
     };
 
     view! {
@@ -24,7 +24,7 @@ pub fn AddTask(#[prop(into)] on_add: Callback<String>) -> impl IntoView {
         <div class="flex flex-col gap-1.5 w-full">
           <p>"Task name"</p>
 
-          <Input bind_value=task_name placeholder="Task name" />
+          <Input bind_value=task_title placeholder="Task name" />
         </div>
 
         <Button>

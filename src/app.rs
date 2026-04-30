@@ -1,4 +1,4 @@
-use crate::components::tasks_view::TasksView;
+use crate::tasks::presentation::components::TasksView;
 use leptos::prelude::*;
 use leptos_meta::{Stylesheet, Title, provide_meta_context};
 use leptos_router::{
