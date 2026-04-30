@@ -1,13 +1,18 @@
 use crate::tasks::domain::Task;
-use std::{fs, io, path::PathBuf};
+use std::{
+    fs, io,
+    path::{Path, PathBuf},
+};
 
 pub struct TaskRepository {
     file_path: PathBuf,
 }
 
 impl TaskRepository {
-    pub fn new(file_path: PathBuf) -> Self {
-        Self { file_path }
+    pub fn new(file_path: &Path) -> Self {
+        Self {
+            file_path: file_path.to_path_buf(),
+        }
     }
 
     pub fn load(&self) -> Result<Vec<Task>, TaskRepositoryError> {
