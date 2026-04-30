@@ -10,6 +10,9 @@
 		"serve": "npm run dev",
 		"tw:build": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css",
 		"tw:watch": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css --watch",
+		"docker": "docker compose up --build -V -d",
+    "docker:postgres": "docker compose up --build -V postgres -d",
+    "docker:postgres:down": "docker compose down",
 		"prepare": "husky"
 	},
 	"dependencies": {
