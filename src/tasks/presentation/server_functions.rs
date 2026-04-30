@@ -7,6 +7,7 @@ use crate::{
 use leptos::prelude::*;
 use std::fmt::Debug;
 
+#[cfg(feature = "ssr")]
 fn server_error(err: impl Debug) -> ServerFnError {
     ServerFnError::new(format!("{err:?}"))
 }
