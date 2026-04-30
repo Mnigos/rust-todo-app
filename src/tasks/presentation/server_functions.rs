@@ -1,12 +1,12 @@
-use crate::tasks::{
-    application::TaskService,
-    domain::{Task, TaskId},
-    infrastructure::TaskRepository,
-};
+use crate::tasks::domain::Task;
+#[cfg(feature = "ssr")]
+use crate::tasks::{application::TaskService, domain::TaskId, infrastructure::TaskRepository};
 use leptos::prelude::*;
 use leptos_ui::clx::ServerFnError;
+#[cfg(feature = "ssr")]
 use std::path::PathBuf;
 
+#[cfg(feature = "ssr")]
 fn create_task_service() -> TaskService {
     let repository = TaskRepository::new(PathBuf::from("data/tasks.json"));
 
