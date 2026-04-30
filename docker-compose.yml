@@ -4,9 +4,9 @@ services:
     ports:
       - ${DATABASE_PORT:-5432}:5432
     environment:
-      POSTGRESQL_USERNAME: ${DATABASE_USERNAME:-todo}
-      POSTGRESQL_PASSWORD: ${DATABASE_PASSWORD:-todo}
-      POSTGRESQL_DATABASE: ${DATABASE_NAME:-todo}
+      POSTGRESQL_USERNAME: ${DATABASE_USERNAME:-postgres}
+      POSTGRESQL_PASSWORD: ${DATABASE_PASSWORD:-postgres}
+      POSTGRESQL_DATABASE: ${DATABASE_NAME:-rust_todo_app}
     volumes:
       - "postgresql_data:/bitnami/postgresql"
 

@@ -1,0 +1,5 @@
+CREATE TABLE tasks (
+    id UUID PRIMARY KEY,
+    title TEXT NOT NULL,
+    is_completed BOOLEAN NOT NULL DEFAULT FALSE
+);
