@@ -1,6 +1,6 @@
 use crate::tasks::{
     domain::{Task, TaskId, TaskTitle, TaskTitleError},
-    infrastracture::{TaskRepository, TaskRepositoryError},
+    infrastructure::{TaskRepository, TaskRepositoryError},
 };
 
 pub struct TaskService {
