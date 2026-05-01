@@ -1,23 +1,18 @@
-use std::{
-    env::{self, VarError},
-    path::{Path, PathBuf},
-};
+use std::env::{self, VarError};
 
 pub struct AppConfig {
-    tasks_file_path: PathBuf,
+    database_url: String,
 }
 
 impl AppConfig {
     pub fn from_env() -> Result<Self, AppConfigError> {
-        let tasks_file_path = env::var("TASKS_FILE_PATH").map_err(AppConfigError::InvalidEnvVar)?;
+        let database_url = env::var("DATABASE_URL").map_err(AppConfigError::InvalidEnvVar)?;
 
-        Ok(Self {
-            tasks_file_path: PathBuf::from(tasks_file_path),
-        })
+        Ok(Self { database_url })
     }
 
-    pub fn tasks_file_path(&self) -> &Path {
-        &self.tasks_file_path
+    pub fn database_url(&self) -> &str {
+        &self.database_url
     }
 }
 
