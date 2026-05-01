@@ -18,6 +18,14 @@ impl Task {
         }
     }
 
+    pub(in crate::tasks) fn restore(id: TaskId, title: TaskTitle, is_completed: bool) -> Self {
+        Self {
+            id,
+            title,
+            is_completed,
+        }
+    }
+
     pub fn id(&self) -> &TaskId {
         &self.id
     }

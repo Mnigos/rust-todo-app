@@ -1,14 +1,15 @@
 use serde::{Deserialize, Serialize};
+use uuid::Uuid;
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
-pub struct TaskId(u64);
+pub struct TaskId(Uuid);
 
 impl TaskId {
-    pub fn new(value: u64) -> Self {
+    pub fn new(value: Uuid) -> Self {
         Self(value)
     }
 
-    pub fn value(&self) -> u64 {
+    pub fn value(&self) -> Uuid {
         self.0
     }
 }
