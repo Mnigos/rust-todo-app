@@ -1,11 +1,11 @@
 use crate::tasks::domain::Task;
 #[cfg(feature = "ssr")]
-use crate::{
-    config::AppConfig,
-    tasks::{application::TaskService, domain::TaskId, infrastructure::TaskRepository},
-};
+use crate::tasks::{application::TaskService, domain::TaskId, infrastructure::TaskRepository};
 use leptos::prelude::*;
+#[cfg(feature = "ssr")]
+use sqlx::PgPool;
 use std::fmt::Debug;
+use uuid::Uuid;
 
 #[cfg(feature = "ssr")]
 fn server_error(err: impl Debug) -> ServerFnError {
@@ -14,8 +14,9 @@ fn server_error(err: impl Debug) -> ServerFnError {
 
 #[cfg(feature = "ssr")]
 fn create_task_service() -> Result<TaskService, ServerFnError> {
-    let app_config = AppConfig::from_env().map_err(server_error)?;
-    let repository = TaskRepository::new(app_config.tasks_file_path());
+    let pool = use_context::<PgPool>()
+        .ok_or_else(|| ServerFnError::new("database pool missing from context"))?;
+    let repository = TaskRepository::new(pool);
 
     Ok(TaskService::new(repository))
 }
@@ -24,20 +25,20 @@ fn create_task_service() -> Result<TaskService, ServerFnError> {
 pub async fn list_tasks() -> Result<Vec<Task>, ServerFnError> {
     let service = create_task_service()?;
 
-    service.list_all().map_err(server_error)
+    service.list_all().await.map_err(server_error)
 }
 
 #[server]
 pub async fn add_task(title: String) -> Result<Task, ServerFnError> {
     let service = create_task_service()?;
 
-    service.add_task(title).map_err(server_error)
+    service.add_task(title).await.map_err(server_error)
 }
 
 #[server]
-pub async fn complete_task(id: u64) -> Result<(), ServerFnError> {
+pub async fn complete_task(id: Uuid) -> Result<(), ServerFnError> {
     let service = create_task_service()?;
 
     let task_id = TaskId::new(id);
-    service.complete_task(&task_id).map_err(server_error)
+    service.complete_task(&task_id).await.map_err(server_error)
 }

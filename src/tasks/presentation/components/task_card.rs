@@ -1,10 +1,11 @@
 use crate::{components::ui::checkbox::Checkbox, tasks::domain::Task};
 use leptos::prelude::*;
+use uuid::Uuid;
 
 #[component]
 pub fn TaskCard(
     #[prop(into)] task: Task,
-    #[prop(into)] on_complete: Callback<u64>,
+    #[prop(into)] on_complete: Callback<Uuid>,
 ) -> impl IntoView {
     let title = task.title().value().to_string();
     let is_completed = task.is_completed();

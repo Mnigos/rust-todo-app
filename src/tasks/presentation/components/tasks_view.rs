@@ -1,6 +1,7 @@
 use super::{AddTask, TaskCard};
 use crate::tasks::presentation::server_functions::{add_task, complete_task, list_tasks};
 use leptos::{prelude::*, task::spawn_local};
+use uuid::Uuid;
 
 #[component]
 pub fn TasksView() -> impl IntoView {
@@ -26,7 +27,7 @@ pub fn TasksView() -> impl IntoView {
         });
     };
 
-    let on_complete = move |task_id: u64| {
+    let on_complete = move |task_id: Uuid| {
         spawn_local(async move {
             match complete_task(task_id).await {
                 Ok(()) => tasks.refetch(),
