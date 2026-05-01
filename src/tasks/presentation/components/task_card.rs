@@ -15,8 +15,8 @@ pub fn TaskCard(
       <div class="flex justify-between items-center py-2 px-3 rounded-lg bg-muted/20">
         <p>{title}</p>
 
-        <Checkbox checked={is_completed} on_checked_change=move |checked| {
-            if checked { on_complete.run(task_id) }
+        <Checkbox checked={is_completed} on_checked_change=move |is_checked| {
+            if is_checked { on_complete.run(task_id) }
         } />
       </div>
     }

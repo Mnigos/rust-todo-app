@@ -42,3 +42,11 @@ pub async fn complete_task(id: Uuid) -> Result<(), ServerFnError> {
     let task_id = TaskId::new(id);
     service.complete_task(&task_id).await.map_err(server_error)
 }
+
+#[server]
+pub async fn reopen_task(id: Uuid) -> Result<(), ServerFnError> {
+    let service = create_task_service()?;
+
+    let task_id = TaskId::new(id);
+    service.reopen_task(&task_id).await.map_err(server_error)
+}

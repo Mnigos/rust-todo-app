@@ -40,6 +40,10 @@ impl Task {
     }
 
     pub fn complete(&mut self) {
-        self.is_completed = true
+        self.is_completed = true;
+    }
+
+    pub fn reopen(&mut self) {
+        self.is_completed = false;
     }
 }

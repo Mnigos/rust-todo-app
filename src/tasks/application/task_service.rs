@@ -53,6 +53,26 @@ impl TaskService {
 
         Ok(())
     }
+
+    pub async fn reopen_task(&self, id: &TaskId) -> Result<(), TaskServiceError> {
+        let Some(mut task) = self
+            .repository
+            .find_by_id(id)
+            .await
+            .map_err(TaskServiceError::RepositoryFailed)?
+        else {
+            return Err(TaskServiceError::TaskNotFound);
+        };
+
+        task.reopen();
+
+        self.repository
+            .update(&task)
+            .await
+            .map_err(TaskServiceError::RepositoryFailed)?;
+
+        Ok(())
+    }
 }
 
 #[derive(Debug)]
