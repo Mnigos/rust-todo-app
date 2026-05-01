@@ -25,6 +25,17 @@
             "enable": true
           }
         },
+        "check": {
+          "overrideCommand": [
+            "cargo",
+            "clippy",
+            "--fix",
+            "--features",
+            "ssr,hydrate",
+            "--message-format=json",
+            "--allow-dirty"
+          ]
+        },
         "diagnostics": {
           "disabled": ["unlinked-file"]
         }

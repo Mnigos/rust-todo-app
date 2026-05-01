@@ -4,9 +4,11 @@
 	"type": "module",
 	"scripts": {
 		"build": "npm run tw:build && cargo leptos build --release",
-		"check": "cargo check --features ssr --bin rust-todo-app && cargo check --features hydrate --lib",
+		"check": "npm run format && cargo check --features ssr --bin rust-todo-app && cargo check --features hydrate --lib",
 		"dev": "npm run tw:build && concurrently -k -n tailwind,leptos \"npm:tw:watch\" \"cargo leptos watch\"",
 		"dev:server": "npm run dev",
+		"format": "cargo fmt --check && cargo clippy --features ssr,hydrate -- -D warnings",
+		"formatFix": "cargo fmt && cargo clippy --fix --features ssr,hydrate --allow-dirty",
 		"serve": "npm run dev",
 		"tw:build": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css",
 		"tw:watch": "npx @tailwindcss/cli -i ./src/tailwind.css -o ./style.css --watch",

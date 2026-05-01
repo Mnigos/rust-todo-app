@@ -1,3 +1,3 @@
 pub mod button;
-pub mod input;
 pub mod checkbox;
+pub mod input;
