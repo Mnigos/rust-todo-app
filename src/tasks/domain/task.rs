@@ -18,6 +18,7 @@ impl Task {
         }
     }
 
+    #[cfg(feature = "ssr")]
     pub(in crate::tasks) fn restore(id: TaskId, title: TaskTitle, is_completed: bool) -> Self {
         Self {
             id,
