@@ -41,7 +41,7 @@ pub fn TasksView() -> impl IntoView {
         <AddTask on_add />
 
         <div class="flex flex-col gap-1">
-            <Suspense fallback=move || view! { <p>"Loading..."</p>}>
+            <Suspense fallback=move || ()>
               {move || {
                   tasks.get().unwrap_or_default().into_iter().map(|task|
                       view! {
