@@ -5,7 +5,7 @@ use uuid::Uuid;
 #[component]
 pub fn TaskCard(
     #[prop(into)] task: Task,
-    #[prop(into)] on_complete: Callback<Uuid>,
+    #[prop(into)] on_completion_change: Callback<(Uuid, bool)>,
 ) -> impl IntoView {
     let title = task.title().value().to_string();
     let is_completed = task.is_completed();
@@ -16,7 +16,7 @@ pub fn TaskCard(
         <p>{title}</p>
 
         <Checkbox checked={is_completed} on_checked_change=move |is_checked| {
-            if is_checked { on_complete.run(task_id) }
+            on_completion_change.run((task_id, is_checked));
         } />
       </div>
     }

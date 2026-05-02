@@ -1,5 +1,7 @@
 use super::{AddTask, TaskCard};
-use crate::tasks::presentation::server_functions::{add_task, complete_task, list_tasks};
+use crate::tasks::presentation::server_functions::{
+    add_task, complete_task, list_tasks, reopen_task,
+};
 use leptos::{prelude::*, task::spawn_local};
 use uuid::Uuid;
 
@@ -27,9 +29,15 @@ pub fn TasksView() -> impl IntoView {
         });
     };
 
-    let on_complete = move |task_id: Uuid| {
+    let on_completion_change = move |(task_id, is_completed): (Uuid, bool)| {
         spawn_local(async move {
-            match complete_task(task_id).await {
+            let result = if is_completed {
+                complete_task(task_id).await
+            } else {
+                reopen_task(task_id).await
+            };
+
+            match result {
                 Ok(()) => tasks.refetch(),
                 Err(err) => leptos::logging::error!("failed to complete task: {:?}", err),
             }
@@ -45,7 +53,7 @@ pub fn TasksView() -> impl IntoView {
               {move || {
                   tasks.get().unwrap_or_default().into_iter().map(|task|
                       view! {
-                        <TaskCard task on_complete />
+                        <TaskCard task on_completion_change />
                       }
                   ).collect_view()
               }}
