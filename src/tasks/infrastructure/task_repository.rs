@@ -14,10 +14,13 @@ impl TaskRepository {
     }
 
     pub async fn find_all(&self) -> Result<Vec<Task>, TaskRepositoryError> {
-        let rows = sqlx::query_as!(TaskRow, "SELECT id, title, is_completed FROM tasks")
-            .fetch_all(&self.pool)
-            .await
-            .map_err(TaskRepositoryError::QueryFailed)?;
+        let rows = sqlx::query_as!(
+            TaskRow,
+            "SELECT id, title, is_completed FROM tasks ORDER BY title ASC"
+        )
+        .fetch_all(&self.pool)
+        .await
+        .map_err(TaskRepositoryError::QueryFailed)?;
 
         rows.into_iter()
             .map(Task::try_from)
