@@ -1,7 +1,9 @@
-use super::{AddTask, TaskCard};
 use crate::tasks::{
     domain::Task,
-    presentation::server_functions::{add_task, complete_task, list_tasks, reopen_task},
+    presentation::{
+        components::{AddTask, TaskCard},
+        server_functions::{add_task, complete_task, list_tasks, reopen_task},
+    },
 };
 use leptos::{prelude::*, task::spawn_local};
 use uuid::Uuid;
