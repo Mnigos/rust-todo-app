@@ -1,12 +1,15 @@
 use super::{AddTask, TaskCard};
-use crate::tasks::presentation::server_functions::{
-    add_task, complete_task, list_tasks, reopen_task,
+use crate::tasks::{
+    domain::Task,
+    presentation::server_functions::{add_task, complete_task, list_tasks, reopen_task},
 };
 use leptos::{prelude::*, task::spawn_local};
 use uuid::Uuid;
 
 #[component]
 pub fn TasksView() -> impl IntoView {
+    // Resource can be pending during refetch; this keeps the previous list visible until fresh data arrives
+    let visible_tasks = RwSignal::new(Vec::<Task>::new());
     let tasks = Resource::new(
         || (),
         |_| async move {
@@ -19,6 +22,12 @@ pub fn TasksView() -> impl IntoView {
             }
         },
     );
+
+    Effect::new(move |_| {
+        if let Some(loaded_tasks) = tasks.get() {
+            visible_tasks.set(loaded_tasks);
+        }
+    });
 
     let on_add = move |title: String| {
         spawn_local(async move {
@@ -49,15 +58,13 @@ pub fn TasksView() -> impl IntoView {
         <AddTask on_add />
 
         <div class="flex flex-col gap-1">
-            <Suspense fallback=move || ()>
-              {move || {
-                  tasks.get().unwrap_or_default().into_iter().map(|task|
-                      view! {
-                        <TaskCard task on_completion_change />
-                      }
-                  ).collect_view()
-              }}
-            </Suspense>
+            {move || {
+                visible_tasks.get().into_iter().map(|task|
+                    view! {
+                      <TaskCard task on_completion_change />
+                    }
+                ).collect_view()
+            }}
         </div>
       </section>
     }
